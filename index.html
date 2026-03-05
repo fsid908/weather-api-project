@@ -12,7 +12,6 @@
 </head>
 <body>
 
-
 <div class="navbar">
   <div class="navbar-left">
     <h1>Weather App</h1>
@@ -21,7 +20,23 @@
     <input type="text" id="cityInput" placeholder="Enter city name">
     <button onclick="getWeather()"><img src="image.png"></button>
   </div>
+
+  <!-- togglebutton -->
+  <div class="temp-toggle">
+  <span id="cLabel">°C</span>
+
+  <label class="switch">
+    <input type="checkbox" id="toggleTemp">
+    <span class="slider"></span>
+  </label>
+
+  <span id="fLabel">°F</span>
 </div>
+</div>
+
+
+
+ <div id="loader">Loading weather...</div>
 
 <div class="weather-info">
   <div class="weather-header">
@@ -35,7 +50,10 @@
 
     <div>
       <p><strong>Feels Like:</strong> <span id="feelslike">--</span> °C</p>
-      <p><strong>Temp:</strong> <span id="temperature">--</span> °C</p>
+      <p><strong>Temp:</strong> 
+<span id="temperature">--</span> 
+<span id="unit">°C</span>
+</p>
       <p><strong>Condition:</strong> <span id="condition">--</span></p>
     </div>
     <div>
@@ -51,6 +69,7 @@
     <div class="forecast-container">
       <div class="forecast-card" id="day1">
         <h3>Day 1</h3>
+        <img class="day-icon" src="">
         <p class="day-temp"> °C</p>
         <p class="day-condition">---</p>
         <p class="day-humidity">Humidity: --%</p>
@@ -58,6 +77,7 @@
       </div>
       <div class="forecast-card" id="day2">
         <h3>Day 2</h3>
+        <img class="day-icon" src="">
         <p class="day-temp"> °C</p>
         <p class="day-condition">---</p>
         <p class="day-humidity">Humidity: --%</p>
@@ -65,6 +85,7 @@
       </div>
       <div class="forecast-card" id="day3">
         <h3>Day 3</h3>
+        <img class="day-icon" src="">
         <p class="day-temp"> °C</p>
         <p class="day-condition">---</p>
         <p class="day-humidity">Humidity: --%</p>
@@ -72,6 +93,7 @@
       </div>
       <div class="forecast-card" id="day4">
         <h3>Day 4</h3>
+        <img class="day-icon" src="">
         <p class="day-temp"> °C</p>
         <p class="day-condition">---</p>
         <p class="day-humidity">Humidity: --%</p>
@@ -79,6 +101,7 @@
       </div>
       <div class="forecast-card" id="day5">
         <h3>Day 5</h3>
+        <img class="day-icon" src="">
         <p class="day-temp"> °C</p>
         <p class="day-condition">---</p>
         <p class="day-humidity">Humidity: --%</p>

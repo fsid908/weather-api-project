@@ -1,62 +1,222 @@
-const apiKey = "a29dab1ab2f64ee8a76163537250510";
-
-function getWeather() {
-  const city = document.getElementById("cityInput").value.trim();
-  if (!city) {
-    alert("Please enter a city name.");
-    return;
-  }
-
-  const currentUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=yes`;
-  const forecastUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=5&aqi=yes&alerts=no`;
-
-  fetch(currentUrl)
-    .then((res) => res.json())
-    .then((data) => {
-      document.getElementById("location").innerText = `${data.location.name}, ${data.location.country}`;
-      document.getElementById("feelslike").innerText = data.current.feelslike_c;
-      document.getElementById("temperature").innerText = data.current.temp_c;
-      document.getElementById("condition").innerText = data.current.condition.text;
-      document.getElementById("humidity").innerText = data.current.humidity;
-      document.getElementById("wind").innerText = data.current.wind_kph;
-      document.getElementById("icon").src = `https:${data.current.condition.icon}`;
+// ===== GLOBAL VARIABLES =====
+const apiKey = "492a7d81b4b62560810900c6bf5a006d";
+let forecastTemps = [];
+let currentTemp = 0;
+let isCelsius = true;
 
 
-      const dateObj = new Date(data.location.localtime);
-      const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-      document.getElementById("date").innerText = dateObj.toLocaleDateString(undefined, options);
-    })
-    .catch((err) => {
-      console.error("Error fetching current weather:", err);
-      alert("Error fetching weather data. Please check the city name.");
-    });
+// ===== HIDE ICONS INITIALLY =====
+document.getElementById("icon").style.display = "none";
+
+document.querySelectorAll(".day-icon").forEach(icon=>{
+icon.style.display = "none";
+});
 
 
-  fetch(forecastUrl)
-    .then((res) => res.json())
-    .then((data) => {
-      for (let i = 0; i < 5; i++) {
-        const day = data.forecast.forecastday[i];
-        const card = document.getElementById(`day${i + 1}`);
+// ===== AUTO LOCATION WEATHER =====
+function getLocationWeather(){
 
-        const date = new Date(day.date);
-        const dayName = date.toLocaleDateString(undefined, { weekday: "long" });
+if(navigator.geolocation){
 
-        const iconUrl = `https:${day.day.condition.icon}`;
-        const iconImg = `<img src="${iconUrl}" alt="weather icon" class="forecast-icon">`;
+navigator.geolocation.getCurrentPosition(async function(position){
 
-        card.innerHTML = `
-          <h3>${dayName}</h3>
-          ${iconImg}
-          <p class="day-temp">${day.day.avgtemp_c} °C</p>
-          <p class="day-condition">${day.day.condition.text}</p>
-          <p class="day-humidity">Humidity: ${day.day.avghumidity}%</p>
-          <p class="day-wind">Wind: ${day.day.maxwind_kph} kph</p>
-        `;
-      }
-    })
-    .catch((err) => {
-      console.error("Error fetching forecast:", err);
-      alert("Could not retrieve forecast data. Please try again.");
-    });
+const lat = position.coords.latitude;
+const lon = position.coords.longitude;
+
+
+// CURRENT WEATHER
+const weatherURL =
+`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+const res = await fetch(weatherURL);
+const data = await res.json();
+
+updateCurrentWeather(data);
+
+
+// FORECAST
+const forecastURL =
+`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+const forecastRes = await fetch(forecastURL);
+const forecastData = await forecastRes.json();
+
+updateForecast(forecastData);
+
+});
+
 }
+
+}
+
+
+
+// ===== CITY SEARCH WEATHER =====
+async function getWeather(){
+
+const city = document.getElementById("cityInput").value.trim();
+
+if(!city){
+alert("Please enter a city name");
+return;
+}
+
+
+// CURRENT WEATHER
+const weatherURL =
+`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+const res = await fetch(weatherURL);
+const data = await res.json();
+
+updateCurrentWeather(data);
+
+
+// FORECAST
+const forecastURL =
+`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+const forecastRes = await fetch(forecastURL);
+const forecastData = await forecastRes.json();
+
+updateForecast(forecastData);
+
+}
+
+
+
+// ===== UPDATE CURRENT WEATHER UI =====
+function updateCurrentWeather(data){
+
+document.getElementById("location").innerText = data.name;
+
+currentTemp = data.main.temp;
+
+document.getElementById("temperature").innerText =
+currentTemp.toFixed(1);
+
+document.getElementById("feelslike").innerText =
+data.main.feels_like;
+
+document.getElementById("condition").innerText =
+data.weather[0].description;
+
+document.getElementById("humidity").innerText =
+data.main.humidity;
+
+document.getElementById("wind").innerText =
+data.wind.speed;
+
+
+// ICON
+const iconCode = data.weather[0].icon;
+
+const icon = document.getElementById("icon");
+
+icon.src =
+`https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+icon.style.display = "block";
+
+
+// DATE + TIME
+const today = new Date();
+
+const options = {
+weekday:"long",
+year:"numeric",
+month:"short",
+day:"numeric",
+hour:"2-digit",
+minute:"2-digit"
+};
+
+document.getElementById("date").innerText =
+today.toLocaleDateString("en-US",options);
+
+}
+
+
+
+// ===== UPDATE FORECAST =====
+function updateForecast(forecastData){
+
+const days = ["day1","day2","day3","day4","day5"];
+
+for(let i=0;i<5;i++){
+
+const item = forecastData.list[i*8];
+
+const card = document.getElementById(days[i]);
+
+const iconCode = item.weather[0].icon;
+
+const iconEl = card.querySelector(".day-icon");
+
+iconEl.src =
+`https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+iconEl.style.display="block";
+
+forecastTemps[i] = item.main.temp;
+
+card.querySelector(".day-temp").innerText =
+forecastTemps[i].toFixed(1) + " °C";
+
+card.querySelector(".day-condition").innerText =
+item.weather[0].description;
+
+card.querySelector(".day-humidity").innerText =
+"Humidity: " + item.main.humidity + "%";
+
+card.querySelector(".day-wind").innerText =
+"Wind: " + item.wind.speed + " kph";
+
+}
+
+}
+
+
+
+// ===== TEMPERATURE TOGGLE =====
+document.getElementById("toggleTemp").addEventListener("click",function(){
+
+const tempEl = document.getElementById("temperature");
+const unitEl = document.getElementById("unit");
+
+if(isCelsius){
+
+// const f = (currentTemp * 9/5) + 32;
+
+let f = (currentTemp * 9/5) + 32;
+tempEl.innerText = f.toFixed(1);
+unitEl.innerText = "°F";
+
+document.querySelectorAll(".day-temp").forEach((el,i)=>{
+let fTemp = (forecastTemps[i] * 9/5) + 32;
+el.innerText = fTemp.toFixed(1) + " °F";
+});
+
+}else{
+
+tempEl.innerText = currentTemp.toFixed(1);
+unitEl.innerText = "°C";
+
+document.querySelectorAll(".day-temp").forEach((el,i)=>{
+el.innerText = forecastTemps[i].toFixed(1) + " °C";
+});
+
+}
+
+isCelsius = !isCelsius;
+
+});
+
+
+
+// ===== AUTO LOAD WEATHER =====
+window.onload = function(){
+
+getLocationWeather();
+
+};
