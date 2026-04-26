@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: url("image.jpg");
+  background: url("assets/image1.jpg");
   min-height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -269,5 +269,113 @@ transform:translateX(26px);
 
   button {
     width: 100%;
+  }
+}
+
+/* ===============================
+   MOBILE VIEW ONLY
+   Desktop view unchanged
+   Add this at END of CSS file
+================================= */
+
+@media (max-width: 768px) {
+
+  .navbar{
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+    text-align: center;
+  }
+
+  .navbar h1{
+    font-size: 24px;
+  }
+
+  .navbar-right{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .navbar-right input{
+    width: 80%;
+    max-width: 100%;
+    margin-right: 0;
+    font-size: 16px;
+    padding: 10px 20px;
+    height: 45px;
+  }
+
+  .navbar-right button{
+    width: 45px;
+    height: 45px;
+  }
+
+  .navbar-right button img{
+    width: 25px;
+  }
+
+  .temp-toggle{
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .weather-info{
+    margin: 20px 10px;
+    padding: 20px 15px;
+  }
+
+  .weather-header h2{
+    font-size: 24px;
+  }
+
+  .weather-header p{
+    font-size: 14px;
+  }
+
+  .weather-grid{
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  #icon{
+    width: 70px;
+    height: 70px;
+  }
+
+  .forecast-container{
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .forecast-card{
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+  }
+
+  .forecast-card h3{
+    font-size: 18px;
+  }
+
+  .forecast-card p{
+    font-size: 14px;
+  }
+
+  h2{
+    font-size: 22px;
+    padding: 0 10px;
+  }
+
+  .section-divider{
+    width: 95%;
+  }
+
+  #loader{
+    font-size: 16px;
+    padding: 10px;
   }
 }

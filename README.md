@@ -1,86 +1,146 @@
-# weather-api-project
-A clean and simple web app providing real-time weather data, including temperature, humidity, and a 5-day forecast for any city worldwide.
+# 🌦️ Weather-App
 
-Weather-App
-A simple, fast, and feature-rich web application that provides real-time current weather conditions and a 5-day forecast for any location worldwide.
+<p align="center">
+<img src="https://img.shields.io/badge/HTML5-Markup-orange?style=for-the-badge&logo=html5">
+<img src="https://img.shields.io/badge/CSS3-Styling-blue?style=for-the-badge&logo=css3">
+<img src="https://img.shields.io/badge/JavaScript-ES6-yellow?style=for-the-badge&logo=javascript">
+<img src="https://img.shields.io/badge/API-Weather-green?style=for-the-badge">
+<img src="https://img.shields.io/badge/Responsive-Yes-success?style=for-the-badge">
+<img src="https://img.shields.io/badge/Status-Live-brightgreen?style=for-the-badge">
+</p>
 
-Built by: Farhan Siddiqui
+<p align="center">
+A clean, fast and modern weather web app that provides real-time weather conditions and 5-day forecast for any city worldwide 🌍
+</p>
 
-Features
-Current Weather: Displays the city name, country, temperature ("Feels Like" included), weather condition, humidity, and wind speed.
+---
 
-5-Day Forecast: Provides a multi-day outlook with daily average temperatures and weather details.
 
-Dynamic UI: Uses pure JavaScript, HTML, and CSS for a clean, responsive interface.
+#  Screenshots
 
-Robust Error Handling: Alerts the user when an invalid city is entered or if there is an issue fetching data.
+##  Home Page
 
-Technologies Used
-HTML5 (Structure)
+<p align="center">
+  <img src="Screenshots/preview1.png" width="45%">
+  <img src="Screenshots/preview2.png" width="45%">
+</p>
 
-CSS3 (Styling)
+---
 
-JavaScript (ES6+) (Logic and API calls)
+#  Features
 
- (Default Weather Data Source)
+✅ Search weather by city name  
+✅ Real-time temperature updates  
+✅ Feels like temperature  
+✅ Humidity level  
+✅ Wind speed  
+✅ Weather conditions  
+✅ 5-Day Forecast  
+✅ Responsive UI  
+✅ Clean design  
+✅ Error handling for invalid city  
+✅ Fast loading performance  
 
-Getting Started
-Follow these steps to get a local copy of the project up and running.
+---
 
-Prerequisites
-You must have a valid API Key from  (or the alternative API mentioned below).
+#  Tech Stack
 
-Installation
-Clone the repository:
+| Technology | Use |
+|------------|-----|
+| HTML5 | Structure |
+| CSS3 | Styling |
+| JavaScript (ES6+) | Logic |
+| Weather API | Real-time Data |
 
-Set up the API Key:
+---
 
-Open the main JavaScript file (script.js).
+#  Project Structure
 
-Replace the placeholder value with your actual API key on the first line:
+```bash id="e4sz7p"
+Weather-App/
+│── index.html
+│── style.css
+│── script.js
+│── README.md
+│── assets/
+│   ├── image1.png
+│   └── image2.png
+├── Screenshots/
+│   ├── preview1
+│   └── preview2
+└── README.md
 
-Run the application:
+```
 
-Open the index.html file in your web browser.
+---
 
-Switching the API (If Forecast Fails)
-If you encounter issues getting the 5-day forecast data with the default API, you may need to switch to an alternative.
+## Installation
 
-A highly recommended alternative with a generous free tier that supports 5-day forecasts is OpenWeatherMap.
+1. Clone the repository
 
-Steps to Switch to OpenWeatherMap
-Get a Key: Sign up for a free account at  to get your new API key.
+```
+git clone https://github.com/fsid908/Weather-App.git
+```
 
-Update script.js: You will need to rewrite the API fetch logic in script.js to use the OpenWeatherMap endpoint and structure the data according to their response format.
+2. Navigate to the project directory
 
-Old WeatherAPI Endpoint (Example):
+```
+cd Weather-App
+```
 
-OpenWeatherMap Endpoint (5-day/3-hour forecast):
+3. Add API Key
 
-OpenWeatherMap uses one endpoint for 5-day forecasts, but the forecast data is in 3-hour intervals, which you would need to process into daily averages.
+```
+const apiKey = "YOUR_API_KEY";
+```
 
-Crucially, you must update the data parsing: Lines 15-22 and 38-56 in your current script.js will need to be changed to match the property names (res.data.location.name, res.data.current.temp_c, etc.) provided by the new OpenWeatherMap API response.
+4. Open `index.html` in your browser.
 
-Contribution
-Contributions are welcome! If you have suggestions for new features or improvements:
+### 🔗 API used
 
-Fork the repository.
+<ul>
+<li>WeatherAPI</li>
+<li>OpenWeatherMap</li>
+</ul>
 
-Create a new branch (git checkout -b feature/your-feature).
+---
 
-Commit your changes (git commit -m 'Add new feature X').
+#  Future Improvements
 
-Push to the branch (git push origin feature/your-feature).
+✅ Dark Mode
+✅ Auto Detect Current Location
+✅ Hourly Forecast
+✅ Better Animations
+✅ Voice Search
+✅ Multiple Language Support
+✅ Save Recent Searches
 
-Open a Pull Request.
+---
 
-Contact:
-Builder: Farhan Siddiqui
+## License
 
-GitHub Profile: [https://github.com/fsid908]
+This project is licensed under the MIT License.
 
-Linked-in Profile: [https://www.linkedin.com/in/farhan-siddiqui-279136319]
+---
 
-Email: [fsid738@gmail.com]
+## Contributing
 
-Lucknow, Uttar Pradesh, India
+Contributions, issues and feature requests are welcome.
+
+---
+
+## Support
+
+If you like this project, give it a ⭐ on GitHub.
+
+---
+
+## Author
+
+**Farhan Siddiqui** </br>
+Git Hub : https://github.com/fsid908 </br>
+LinkedIn : https://www.linkedin.com/in/farhan-siddiqui-dev </br>
+Email : fsid738@gmail.com
+
+---
+Made with ❤️ by Farhan Siddiqui
