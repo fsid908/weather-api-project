@@ -29,17 +29,17 @@ A clean, fast and modern weather web app that provides real-time weather conditi
 
 #  Features
 
--[] Search weather by city name  
--[] Real-time temperature updates  
--[] Feels like temperature  
--[] Humidity level  
--[] Wind speed  
--[] Weather conditions  
--[] 5-Day Forecast  
--[] Responsive UI  
--[] Clean design  
--[] Error handling for invalid city  
--[] Fast loading performance  
+- Search weather by city name  
+- Real-time temperature updates  
+- Feels like temperature  
+- Humidity level  
+- Wind speed  
+- Weather conditions  
+- 5-Day Forecast  
+- Responsive UI  
+- Clean design  
+- Error handling for invalid city  
+- Fast loading performance  
 
 ---
 
@@ -107,13 +107,13 @@ const apiKey = "YOUR_API_KEY";
 
 #  Future Improvements
 
--[] Dark Mode
--[] Auto Detect Current Location
--[] Hourly Forecast
--[] Better Animations
--[] Voice Search
--[] Multiple Language Support
--[] Save Recent Searches
+- dark mode
+- Auto detect current Location
+- Hourly Forecast
+- Better Animation
+- Voice Search
+- Multiple languages Support
+- Save recent searches
 
 ---
 
